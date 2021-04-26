@@ -1,10 +1,29 @@
 # Debian Network Reinstall Script
 
-## Introduction
-
 This script is written to reinstall a VPS/virtual machine to Debian 10 Buster.
 
-## Should Work On
+Project short url: https://git.io/debi
+
+
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#introduction">Introduction</a>
+    </li>
+    <li>
+      <a href="#usage">Usage</a>
+    </li>
+    <li>
+      <a href="#available-options">Available Options</a>
+    </li>
+    <li><a href="#license">License</a></li>
+  </ol>
+</details>
+
+
+## Introduction
 
 ### Virtualization Platform
 
@@ -20,7 +39,7 @@ This script is written to reinstall a VPS/virtual machine to Debian 10 Buster.
  * Ubuntu 14.04 or later
  * CentOS 7 or later
 
-## How It Works
+### How It Works
 
 1. Generate a preseed file to automate installation
 2. Download the 'Debian-Installer' to the `/boot` directory
@@ -28,39 +47,27 @@ This script is written to reinstall a VPS/virtual machine to Debian 10 Buster.
 
 ## Usage
 
-### 1. Download
+Run the script under **root** :
 
-Download the script with curl:
+    bash <(wget -qO- 'https://git.io/debi.sh')  --user root --bbr --firmware
 
-    curl -fLO https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh
-    
-    # for IPv6-only machines
-    curl -fLO  --resolve 'raw.githubusercontent.com:443:2a04:4e42::133' https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh
-
-or wget:
-
-    wget -O debi.sh https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh
-
-### 2. Run
-
-Run the script under root or using sudo:
-
-    chmod a+rx debi.sh
-    sudo ./debi.sh
-
-By default, an admin user `debian` with sudo privilege will be created during the installation. Use `--user root` if you prefer.
-
-### 3. Reboot
+(If you don't use `--user root`, an admin user `debian` with sudo privilege will be created during the installation.)
 
 If everything looks good, reboot the machine:
 
-    sudo shutdown -r now
+    reboot
 
 Otherwise, you can run this command to revert all changes made by the script:
 
-    sudo rm -rf debi.sh /etc/default/grub.d/zz-debi.cfg /boot/debian-* && { sudo update-grub || sudo grub2-mkconfig -o /boot/grub2/grub.cfg; }
+    rm -rf debi.sh /etc/default/grub.d/zz-debi.cfg /boot/debian-* && { update-grub || grub2-mkconfig -o /boot/grub2/grub.cfg; }
 
 ## Available Options
+
+ * `--username, --user debian` New user with `sudo` privilege or `root`
+ * `--password <string>` Password of the new user. **You'll be prompted if you choose to not specify it here**
+ * `--bbr` Enable TCP BBR congestion control
+ * `--firmware` Load additional [non-free firmwares](https://wiki.debian.org/Firmware#Firmware_during_the_installation)
+ * `--grub-timeout 5` How many seconds the GRUB menu shows before entering the installer
 
  * `--ip <string>` Disable the auto network config (DHCP) and configure a static IP address, e.g. `10.0.0.2`, `1.2.3.4/24`, `2001:2345:6789:abcd::ef/48`
  * `--netmask <string>` e.g. `255.255.255.0`, `ffff:ffff:ffff:ffff::`
@@ -75,8 +82,6 @@ Otherwise, you can run this command to revert all changes made by the script:
  * `--mirror-directory /debian`
  * `--security-repository http://security.debian.org/debian-security` Magic value: `'mirror' = <mirror-protocol>://<mirror-host>/<mirror-directory>/../debian-security`
  * `--no-account-setup, --no-user` **(Manual installation)** Proceed account setup manually in VNC or remote console.
- * `--username, --user debian` New user with `sudo` privilege or `root`
- * `--password <string>` Password of the new user. **You'll be prompted if you choose to not specify it here**
  * `--authorized-keys-url <string>` URL to your authorized keys for SSH authentication. e.g. `https://github.com/torvalds.keys`
  * `--sudo-with-password` Require password when the user invokes `sudo` command
  * `--timezone UTC` https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
@@ -100,9 +105,7 @@ Otherwise, you can run this command to revert all changes made by the script:
  * `--power-off` Power off after installation rather than reboot
  * `--architecture <string>` e.g. `amd64`, `i386`, `arm64`, `armhf`, etc.
  * `--boot-directory <string>`
- * `--firmware` Load additional [non-free firmwares](https://wiki.debian.org/Firmware#Firmware_during_the_installation)
  * `--no-force-efi-extra-removable` [See](https://wiki.debian.org/UEFI#Force_grub-efi_installation_to_the_removable_media_path)
- * `--grub-timeout 5` How many seconds the GRUB menu shows before entering the installer
  * `--dry-run` Print generated preseed and GRUB entry without downloading the installer and actually saving them
 
 ### Presets
@@ -126,3 +129,8 @@ Otherwise, you can run this command to revert all changes made by the script:
  * `--mirror-host mirrors.aliyun.com`
  * `--security-repository mirror`
  * `--ntp ntp.aliyun.com`
+
+## License
+[BSD 2-Clause](LICENSE) © tonywww
+
+Credit: bohanyang
