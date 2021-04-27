@@ -65,10 +65,11 @@ Otherwise, you can run this command to revert all changes made by the script:
 
  * `--username, --user debian` New user with `sudo` privilege or `root`
  * `--password <string>` Password of the new user. **You'll be prompted if you choose to not specify it here**
+ * `--authorized-keys-url <string>` URL to your authorized keys for SSH authentication. e.g. `https://github.com/torvalds.keys`
  * `--bbr` Enable TCP BBR congestion control
  * `--firmware` Load additional [non-free firmwares](https://wiki.debian.org/Firmware#Firmware_during_the_installation)
  * `--grub-timeout 5` How many seconds the GRUB menu shows before entering the installer
-
+ *
  * `--ip <string>` Disable the auto network config (DHCP) and configure a static IP address, e.g. `10.0.0.2`, `1.2.3.4/24`, `2001:2345:6789:abcd::ef/48`
  * `--netmask <string>` e.g. `255.255.255.0`, `ffff:ffff:ffff:ffff::`
  * `--gateway <string>` e.g. `10.0.0.1`
@@ -82,7 +83,6 @@ Otherwise, you can run this command to revert all changes made by the script:
  * `--mirror-directory /debian`
  * `--security-repository http://security.debian.org/debian-security` Magic value: `'mirror' = <mirror-protocol>://<mirror-host>/<mirror-directory>/../debian-security`
  * `--no-account-setup, --no-user` **(Manual installation)** Proceed account setup manually in VNC or remote console.
- * `--authorized-keys-url <string>` URL to your authorized keys for SSH authentication. e.g. `https://github.com/torvalds.keys`
  * `--sudo-with-password` Require password when the user invokes `sudo` command
  * `--timezone UTC` https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
  * `--ntp 0.debian.pool.ntp.org`
@@ -100,7 +100,6 @@ Otherwise, you can run this command to revert all changes made by the script:
  * `--full-upgrade` `apt dist-upgrade`
  * `--no-upgrade` 
  * `--ethx` Disable *Consistent Network Device Naming* to get interface names like *ethX* back
- * `--bbr` Enable TCP BBR congestion control
  * `--hold` Don't reboot or power off after installation
  * `--power-off` Power off after installation rather than reboot
  * `--architecture <string>` e.g. `amd64`, `i386`, `arm64`, `armhf`, etc.
