@@ -40,20 +40,22 @@ Project short url: https://git.io/debi
 
 以具有**sudo**特权的一般用户运行以下脚本:
 
-    sudo bash <(wget -qO- https://git.io/debi.sh) --bbr --user root --password mypass
+    sudo bash <(wget -qO- https://git.io/debi.sh) --bbr --ethx --user root --password mypass
 
 或者以**root**用户直接运行以下脚本:
 
-    bash <(wget -qO- https://git.io/debi.sh) --bbr --user root --password mypass
+    bash <(wget -qO- https://git.io/debi.sh) --bbr --ethx --user root --password mypass
 
- * 开启`TCP BBR`.
+ * 开启TCP BBR.
+ * 设置网卡名称形式为`eth0`而不是`ens3`.
  * 如果不加`--user root`，默认管理员用户`debian`将创建(带有`sudo`权限).
  * 如果不加`--password <string>`会提示输入管理员密码.
  * 以上脚本默认管理员密码为`mypass`，可更改为你设定的密码.
+ * 如果是一般的 x86 架构 64 位机器（非 ARM 架构），还可以添加`--cloud-kernel`使用轻量版内核.
 
 如果脚本运行后没有报错，重启VPS进行自动安装.
 
-(需等待5-10分钟, 安装完毕后原登录key无效，仅使用密码登录.)
+(需等待5-10分钟，安装完毕后原登录key无效，仅使用密码登录.)
 
     sudo reboot
 
@@ -68,13 +70,14 @@ Project short url: https://git.io/debi
 
 Run the script from user with **sudo** privilegeunder: 
 
-    sudo bash <(wget -qO- https://git.io/debi.sh) --bbr --user root --password mypass
+    sudo bash <(wget -qO- https://git.io/debi.sh) --bbr --ethx --user root --password mypass
 
 Or run the script under **root** : 
 
-    bash <(wget -qO- https://git.io/debi.sh) --bbr --user root --password mypass
+    bash <(wget -qO- https://git.io/debi.sh) --bbr --ethx --user root --password mypass
 
  * Enable TCP BBR.
+ * Set interface name to `eth0` instead of `ens3`.
  * If you don't use `--user root`, an admin user `debian` with sudo privilege will be created during the installation.
  * If You don't use `--password <string>`, the password will be prompted.
  * Default root password is `mypass`. You may change to your own password.
@@ -94,6 +97,7 @@ Otherwise, you can run this command to revert all changes made by the script:
 ## Available Options
 
  * `--bbr` Enable TCP BBR congestion control
+ * `--ethx` Disable *Consistent Network Device Naming* to get interface names like *ethX* back
  * `--username, --user debian` New user with `sudo` privilege or `root`
  * `--password <string>` Password of the new user. **You'll be prompted if you choose to not specify it here**
  * `--firmware` Load additional [non-free firmwares](https://wiki.debian.org/Firmware#Firmware_during_the_installation)
@@ -129,7 +133,6 @@ Otherwise, you can run this command to revert all changes made by the script:
  * `--safe-upgrade` **(Default)** `apt upgrade --with-new-pkgs`. [See](https://salsa.debian.org/installer-team/pkgsel/-/blob/master/debian/postinst)
  * `--full-upgrade` `apt dist-upgrade`
  * `--no-upgrade` 
- * `--ethx` Disable *Consistent Network Device Naming* to get interface names like *ethX* back
  * `--hold` Don't reboot or power off after installation
  * `--power-off` Power off after installation rather than reboot
  * `--architecture <string>` e.g. `amd64`, `i386`, `arm64`, `armhf`, etc.
