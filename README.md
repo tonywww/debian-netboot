@@ -40,18 +40,24 @@ Project short url: https://git.io/debi
 
 以具有**sudo**特权的一般用户运行以下脚本:
 
-    sudo bash <(wget -qO- https://git.io/debi.sh) --bbr --user root --password mypass)
+    sudo bash <(wget -qO- https://git.io/debi.sh) --bbr --user root --password mypass
 
 或者以**root**用户直接运行以下脚本:
 
-    bash <(wget -qO- https://git.io/debi.sh) --bbr --user root --password mypass)
+    bash <(wget -qO- https://git.io/debi.sh) --bbr --user root --password mypass
 
  * 开启`TCP BBR`.
  * 如果不加`--user root`，默认管理员用户`debian`将创建(带有`sudo`权限).
  * 如果不加`--password <string>`会提示输入管理员密码.
  * 以上脚本默认管理员密码为`mypass`，可更改为你设定的密码.
 
-如果脚本运行后没有报错，重启VPS进行自动安装. (需等待5-10分钟, 安装完毕后原登录key无效，仅使用密码登录.)
+如果脚本运行后没有报错，重启VPS进行自动安装.
+
+(需等待5-10分钟, 安装完毕后原登录key无效，仅使用密码登录.)
+
+    sudo reboot
+
+或者以**root**用户:
 
     reboot
 
@@ -62,11 +68,11 @@ Project short url: https://git.io/debi
 
 Run the script from user with **sudo** privilegeunder: 
 
-    sudo bash <(wget -qO- https://git.io/debi.sh) --bbr --user root --password mypass)
+    sudo bash <(wget -qO- https://git.io/debi.sh) --bbr --user root --password mypass
 
 Or run the script under **root** : 
 
-    bash <(wget -qO- https://git.io/debi.sh) --bbr --user root --password mypass)
+    bash <(wget -qO- https://git.io/debi.sh) --bbr --user root --password mypass
 
  * Enable TCP BBR.
  * If you don't use `--user root`, an admin user `debian` with sudo privilege will be created during the installation.
@@ -74,6 +80,10 @@ Or run the script under **root** :
  * Default root password is `mypass`. You may change to your own password.
 
 If everything looks good, reboot the machine:
+
+    sudo reboot
+
+or under **root**:
 
     reboot
 
@@ -86,10 +96,11 @@ Otherwise, you can run this command to revert all changes made by the script:
  * `--bbr` Enable TCP BBR congestion control
  * `--username, --user debian` New user with `sudo` privilege or `root`
  * `--password <string>` Password of the new user. **You'll be prompted if you choose to not specify it here**
- * `--network-console` Enable the network console of the installer. `ssh installer@ip` to connect
  * `--firmware` Load additional [non-free firmwares](https://wiki.debian.org/Firmware#Firmware_during_the_installation)
  * `--grub-timeout 5` How many seconds the GRUB menu shows before entering the installer
- *
+ * `--network-console` Enable the network console of the installer. `ssh installer@ip` to connect
+ * `--timezone UTC` https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
+ * 
  * `--ip <string>` Disable the auto network config (DHCP) and configure a static IP address, e.g. `10.0.0.2`, `1.2.3.4/24`, `2001:2345:6789:abcd::ef/48`
  * `--netmask <string>` e.g. `255.255.255.0`, `ffff:ffff:ffff:ffff::`
  * `--gateway <string>` e.g. `10.0.0.1`
@@ -104,7 +115,6 @@ Otherwise, you can run this command to revert all changes made by the script:
  * `--no-account-setup, --no-user` **(Manual installation)** Proceed account setup manually in VNC or remote console.
  * `--authorized-keys-url <string>` URL to your authorized keys for SSH authentication. e.g. `https://github.com/torvalds.keys`
  * `--sudo-with-password` Require password when the user invokes `sudo` command
- * `--timezone UTC` https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
  * `--ntp 0.debian.pool.ntp.org`
  * `--no-disk-partitioning, --no-part` **(Manual installation)** Proceed disk partitioning manually in VNC or remote console
  * `--disk <string>` Manually select a disk for installation. **Please remember to specify this when more than one disk is available!** e.g. `/dev/sda`
