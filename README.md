@@ -2,7 +2,7 @@
 
 This script is written to reinstall a VPS/virtual machine to Debian 10 Buster.
 
-(适用于甲骨文amd/arm系列VPS)
+**(适用于甲骨文amd/arm系列VPS)**
 
 Project short url: https://git.io/debi
 
@@ -38,11 +38,7 @@ Project short url: https://git.io/debi
 
 ### Chinese Version:
 
-以具有**sudo**特权的一般用户运行以下脚本:
-
-    sudo bash <(wget -qO- https://git.io/debi.sh) --bbr --ethx --user root --password mypass
-
-或者以**root**用户直接运行以下脚本:
+以**root**用户运行以下脚本: (一般用户需先运行`sudo -i`)
 
     bash <(wget -qO- https://git.io/debi.sh) --bbr --ethx --user root --password mypass
 
@@ -57,22 +53,18 @@ Project short url: https://git.io/debi
 
 (需等待5-10分钟，安装完毕后原登录key无效，仅使用密码登录.)
 
-    sudo reboot
-
-或者以**root**用户:
-
     reboot
 
-参考: [甲骨文云服务器自动获取 IPv6](https://github.com/bohanyang/debi/wiki/%E7%94%B2%E9%AA%A8%E6%96%87%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%87%AA%E5%8A%A8%E8%8E%B7%E5%8F%96-IPv6)
+IPv6参考: 
+
+[甲骨文云服务器: 自动获取 IPv6](https://github.com/bohanyang/debi/wiki/%E7%94%B2%E9%AA%A8%E6%96%87%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%87%AA%E5%8A%A8%E8%8E%B7%E5%8F%96-IPv6)
+
+[甲骨文云服务器: 纯 IPv6 网络（无公网 IPv4）下安装方法](https://github.com/bohanyang/debi/wiki/%E7%94%B2%E9%AA%A8%E6%96%87%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BA%AF-IPv6-%E7%BD%91%E7%BB%9C%EF%BC%88%E6%97%A0%E5%85%AC%E7%BD%91-IPv4%EF%BC%89%E4%B8%8B%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95)
 
 
 ### English Version:
 
-Run the script from user with **sudo** privilegeunder: 
-
-    sudo bash <(wget -qO- https://git.io/debi.sh) --bbr --ethx --user root --password mypass
-
-Or run the script under **root** : 
+Run the script under **root** : (non-root user needs to run `sudo -i` first)
 
     bash <(wget -qO- https://git.io/debi.sh) --bbr --ethx --user root --password mypass
 
@@ -83,10 +75,6 @@ Or run the script under **root** :
  * Default root password is `mypass`. You may change to your own password.
 
 If everything looks good, reboot the machine:
-
-    sudo reboot
-
-or under **root**:
 
     reboot
 
