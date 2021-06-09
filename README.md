@@ -2,7 +2,7 @@
 
 This script is written to reinstall a VPS/virtual machine to Debian 10 Buster.
 
-**(适用于甲骨文amd/arm系列VPS)**
+**(适用于甲骨文amd64/arm64系列VPS)**
 
 Project short url: https://git.io/debi
 
@@ -57,9 +57,11 @@ Project short url: https://git.io/debi
 
 IPv6参考: 
 
-[甲骨文云服务器: 自动获取 IPv6](https://github.com/bohanyang/debi/wiki/%E7%94%B2%E9%AA%A8%E6%96%87%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%87%AA%E5%8A%A8%E8%8E%B7%E5%8F%96-IPv6)
+[Debian 10配置自动获取IPV6 **(首选，ifupdown方式)**](https://github.com/tonywww/debian-netboot/wiki/Debian-10%E9%85%8D%E7%BD%AE%E8%87%AA%E5%8A%A8%E8%8E%B7%E5%8F%96IPV6)
 
-[甲骨文云服务器: 纯 IPv6 网络（无公网 IPv4）下安装方法](https://github.com/bohanyang/debi/wiki/%E7%94%B2%E9%AA%A8%E6%96%87%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BA%AF-IPv6-%E7%BD%91%E7%BB%9C%EF%BC%88%E6%97%A0%E5%85%AC%E7%BD%91-IPv4%EF%BC%89%E4%B8%8B%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95)
+[Debian 10配置自动获取IPv6 (systemd-networkd方式)](https://github.com/bohanyang/debi/wiki/%E7%94%B2%E9%AA%A8%E6%96%87%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%87%AA%E5%8A%A8%E8%8E%B7%E5%8F%96-IPv6)
+
+[甲骨文云服务器纯 IPv6 网络（无公网 IPv4）下安装方法](https://github.com/bohanyang/debi/wiki/%E7%94%B2%E9%AA%A8%E6%96%87%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BA%AF-IPv6-%E7%BD%91%E7%BB%9C%EF%BC%88%E6%97%A0%E5%85%AC%E7%BD%91-IPv4%EF%BC%89%E4%B8%8B%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95)
 
 
 ### English Version:
@@ -81,6 +83,8 @@ If everything looks good, reboot the machine:
 Otherwise, you can run this command to revert all changes made by the script:
 
     rm -rf debi.sh /etc/default/grub.d/zz-debi.cfg /boot/debian-* && { update-grub || grub2-mkconfig -o /boot/grub2/grub.cfg; }
+
+[Configure IPV6 DHCP on Debian 10](https://github.com/tonywww/debian-netboot/wiki/Configure-IPV6-DHCP-on-Debian-10)
 
 ## Available Options
 
