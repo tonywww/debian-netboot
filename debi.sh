@@ -594,7 +594,7 @@ apt_components=main
 [ "$apt_non_free_firmware" = true ] && apt_components="$apt_components non-free-firmware"
 
 apt_services=updates
-[ "$apt_backports" = true ] && apt_services="$apt_services, backports"
+[ "$apt_backports" = true ] && has_backports && apt_services="$apt_services, backports"
 
 installer_directory="/boot/debian-$suite"
 
