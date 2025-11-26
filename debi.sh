@@ -215,8 +215,11 @@ has_cloud_kernel() {
 # Returns 0 if available, 1 if not
 has_backports() {
     case $suite in
-        buster|bullseye|oldoldstable|bookworm|oldstable|trixie|stable|forky|testing) return
+        bookworm|oldstable|trixie|stable|forky|testing) return
     esac
+
+    # buster|bullseye|oldoldstable DO have backports, but it's in archive.debian.org now
+    # considering mirrors support varies and the code complexity we must accommodate, we just treat them as no backports available
 
     warn "No backports kernel is available for $suite"
 
