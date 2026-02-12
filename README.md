@@ -1,7 +1,52 @@
-# Debian Network Reinstall Script
+<a href="#-english-version">English version</a>
 
-- <span lang="zh-CN">[中文版在这里](./README.zh-CN.md)</span>
-- <span lang="ja-JP">[日本語はこちら](./README.ja-JP.md)</span>
+# Debian 网络重装脚本
+
+## 这是什么？
+
+一个通过网络启动（network boot）方式，将任何 VPS 或物理机重装为最小化 Debian 系统的脚本。其工作原理是将 Debian 安装程序注入到 GRUB 中，并自动完成安装过程的配置。
+
+**非常适合以下场景：**
+
+  - 将 Oracle Cloud 的 Ubuntu 镜像更换为 Debian
+  - 移除云服务商内置的监控代理
+  - 创建最小、纯净的 Debian 环境
+  - 使用 preseed 或 cloud-init 实现自动化安装
+  - 拯救或恢复损坏的系统
+
+## 快速上手
+
+以**root**用户运行以下脚本: (一般用户需先加上`sudo`运行)
+````bash
+bash <(wget -qO- https://git.io/debi.sh) --bbr --ethx --timezone America/New_York
+````
+ * 开启TCP BBR.
+ * 设置网卡名称形式为`eth0`而不是`ens3`.
+ * 设置时区为New York,默认时区为UTC.
+ * 如果不加`--user root`，默认管理员用户`debian`将创建(带有`sudo`权限).
+ * 如果是一般的 x86 架构 64 位机器（非 ARM 架构），还可以添加`--cloud-kernel`使用轻量版内核.
+
+如果脚本运行后没有报错，重启VPS进行自动安装.
+
+````bash
+reboot
+````
+(需等待5-10分钟，安装完毕后原登录key无效，仅使用密码登录.)
+
+**默认设置:** Debian 13 (trixie)，DHCP 网络，创建一个名为 debian 并拥有 sudo 权限的用户，脚本会提示你为该用户设置密码。
+
+IPv6参考: 
+
+[Debian 10配置自动获取IPV6 **(首选，ifupdown方式)**](https://github.com/tonywww/debian-netboot/wiki/Debian-10%E9%85%8D%E7%BD%AE%E8%87%AA%E5%8A%A8%E8%8E%B7%E5%8F%96IPV6)
+
+[Debian 10配置自动获取IPv6 (systemd-networkd方式)](https://github.com/bohanyang/debi/wiki/%E7%94%B2%E9%AA%A8%E6%96%87%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%87%AA%E5%8A%A8%E8%8E%B7%E5%8F%96-IPv6)
+
+[甲骨文云服务器纯 IPv6 网络（无公网 IPv4）下安装方法](https://github.com/bohanyang/debi/wiki/%E7%94%B2%E9%AA%A8%E6%96%87%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BA%AF-IPv6-%E7%BD%91%E7%BB%9C%EF%BC%88%E6%97%A0%E5%85%AC%E7%BD%91-IPv4%EF%BC%89%E4%B8%8B%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95)
+
+
+## English Version:
+
+# Debian Network Reinstall Script
 
 ## What is this?
 
@@ -16,22 +61,27 @@ A script that reinstalls any VPS or physical machine to minimal Debian via netwo
 
 ## Quick Start
 
-```bash
-# Download the script
-curl -fLO https://raw.githubusercontent.com/bohanyang/debi/master/debi.sh
-chmod +x debi.sh
+Run the script under **root** : (non-root user needs to add `sudo` to run)
+````bash
+bash <(wget -qO- https://git.io/debi.sh) --bbr --ethx --timezone America/New_York
+````
+ * Enable TCP BBR.
+ * Set interface name to `eth0` instead of `ens3`.
+ * Set timezone to New York. The default is UTC.
+ * If you don't use `--user root`, an admin user `debian` with sudo privilege will be created during the installation.
 
-# Basic installation (creates user 'debian' with sudo access)
-sudo ./debi.sh
-
-# Or install as root user instead
-sudo ./debi.sh --user root
-
-# Reboot when ready
-sudo reboot
-```
+If everything looks good, reboot the machine:
+````bash
+reboot
+````
 
 **Default settings:** Debian 13 (trixie), DHCP networking, user `debian` with sudo access, you'll be prompted for password.
+
+Otherwise, you can run this command to revert all changes made by the script:
+
+    rm -rf debi.sh /etc/default/grub.d/zz-debi.cfg /boot/debian-* && { update-grub || grub2-mkconfig -o /boot/grub2/grub.cfg; }
+
+[Configure IPV6 DHCP on Debian 10](https://github.com/tonywww/debian-netboot/wiki/Configure-IPV6-DHCP-on-Debian-10)
 
 ## Platform Support
 
