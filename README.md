@@ -18,7 +18,7 @@
 
 以**root**用户运行以下脚本: (一般用户需先加上`sudo`运行)
 ````bash
-bash <(wget -qO- https://git.io/debi.sh) --bbr --ethx --timezone America/New_York>
+bash <(wget -qO- https://git.io/debi.sh) --bbr --ethx --timezone America/New_York
 ````
  * 开启TCP BBR.
  * 设置网卡名称形式为`eth0`而不是`ens3`.
@@ -63,7 +63,7 @@ A script that reinstalls any VPS or physical machine to minimal Debian via netwo
 
 Run the script under **root** : (non-root user needs to add `sudo` to run)
 ````bash
-bash <(wget -qO- https://git.io/debi.sh) --bbr --ethx --timezone America/New_York>
+bash <(wget -qO- https://git.io/debi.sh) --bbr --ethx --timezone America/New_York
 ````
  * Enable TCP BBR.
  * Set interface name to `eth0` instead of `ens3`.
