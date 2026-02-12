@@ -1,4 +1,4 @@
-<a href="#-english-version">English version</a>
+<a href="#english-version">English version</a>
 
 # Debian 网络重装脚本
 
